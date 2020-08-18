@@ -50,8 +50,8 @@ class Search:
         """
         if url == "":
             
-        soup = search(self.url,
-            self.any_field, self.title, self.author, self.single_chapter,
+        soup = search(
+            self.url, self.any_field, self.title, self.author, self.single_chapter,
             self.word_count, self.language, self.fandoms, self.hits,
             self.bookmarks, self.comments, self.completion_status, self.page)
 
