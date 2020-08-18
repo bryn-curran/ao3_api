@@ -1,4 +1,5 @@
 from functools import cached_property
+from math import ceil
 
 import requests
 from bs4 import BeautifulSoup
