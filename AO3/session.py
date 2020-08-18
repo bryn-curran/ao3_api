@@ -8,6 +8,7 @@ from .requester import requester
 from .series import Series
 from .users import User
 from .works import Work
+from .search import Search
 
 
 class GuestSession:
