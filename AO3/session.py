@@ -392,20 +392,7 @@ class Session(GuestSession, Search):
 
         return string.replace(",", "")
     
-    def search(
-        url="",
-        any_field="",
-        title="", 
-        author="", 
-        single_chapter=0, 
-        word_count=None, 
-        language="", 
-        fandoms="", 
-        hits=None,
-        bookmarks=None,
-        comments=None,
-        completion_status=None,
-        page=1):
+    def search(self):
         """Returns the results page for the search as a Soup object
         Args:
             any_field (str, optional): Generic search. Defaults to "".
