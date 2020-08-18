@@ -392,38 +392,7 @@ class Session(GuestSession):
 
         return string.replace(",", "")
     
-    
-  def update(self):
-        """Sends a request to the AO3 website with the defined search parameters, and updates all info.
-        This function is threadable.
-        """
-
-        soup = search(
-            self.url, self.any_field, self.title, self.author, self.single_chapter,
-            self.word_count, self.language, self.fandoms, self.hits,
-            self.bookmarks, self.comments, self.completion_status, self.page)
-
-        results = soup.find("ol", {'class': 'work index group'})
-        works = []
-        for work in results.find_all("li", {'class': 'work blurb group'}):
-            authors = []
-            for a in work.h4.find_all("a"):
-                if 'rel' in a.attrs.keys():
-                    if "author" in a['rel']:
-                        authors.append(User(a.string, load=False))
-                elif a.attrs["href"].startswith("/works"):
-                    workname = a.string
-                    workid = utils.workid_from_url(a['href'])
-                    
-            new = Work(workid, load=False)
-            setattr(new, "authors", authors)
-            setattr(new, "title", workname)
-            works.append(new)
-            
-        self.results = works
-        maindiv = soup.find("div", {"class": "works-search region", "id": "main"})
-        self.total_results = int(maindiv.find("h3", {"class": "heading"}).getText().strip().split(" ")[0])
-        self.pages = ceil(self.total_results / 20)
+ 
         
         
 def search(
