@@ -48,12 +48,11 @@ class Search:
         """Sends a request to the AO3 website with the defined search parameters, and updates all info.
         This function is threadable.
         """
-        if url == "":
-            
+
         soup = search(
             self.any_field, self.title, self.author, self.single_chapter,
             self.word_count, self.language, self.fandoms, self.hits,
-            self.bookmarks, self.comments, self.completion_status, self.page, self.url,)
+            self.bookmarks, self.comments, self.completion_status, self.page)
 
         results = soup.find("ol", {'class': 'work index group'})
         works = []
@@ -93,7 +92,6 @@ def search(
     completion_status=None,
     page=1):
     """Returns the results page for the search as a Soup object
-
     Args:
         any_field (str, optional): Generic search. Defaults to "".
         title (str, optional): Title of the work. Defaults to "".
@@ -106,7 +104,6 @@ def search(
         bookmarks (AO3.utils.Constraint, optional): Number of bookmarks. Defaults to None.
         comments (AO3.utils.Constraint, optional): Number of comments. Defaults to None.
         page (int, optional): Page number. Defaults to 1.
-
     Returns:
         bs4.BeautifulSoup: Search result's soup
     """
@@ -143,4 +140,3 @@ def search(
         raise utils.HTTPError("We are being rate-limited. Try again in a while or reduce the number of requests")
     soup = BeautifulSoup(req.content, features="lxml")
     return soup
-
