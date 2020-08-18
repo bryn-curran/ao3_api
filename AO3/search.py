@@ -76,6 +76,7 @@ class Search:
         
         
 def search(
+    url="",
     any_field="",
     title="", 
     author="", 
@@ -131,10 +132,12 @@ def search(
     if completion_status is not None:
         query.add_field(f"work_search[complete]={'T' if completion_status else 'F'}")     
     
-    url = f"https://archiveofourown.org/works/search?{query.string}"
+    if url == "":
+        url = f"https://archiveofourown.org/works/search?{query.string}"
     
     req = requester.request("get", url)
     if req.status_code == 429:
         raise utils.HTTPError("We are being rate-limited. Try again in a while or reduce the number of requests")
     soup = BeautifulSoup(req.content, features="lxml")
     return soup
+
