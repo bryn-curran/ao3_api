@@ -11,6 +11,7 @@ from .works import Work
 class Search:
     def __init__(
         self,
+        url="",
         any_field="",
         title="", 
         author="", 
@@ -24,6 +25,7 @@ class Search:
         completion_status=None,
         page=1):
         
+        self.url = url
         self.any_field = any_field
         self.title = title
         self.author = author
